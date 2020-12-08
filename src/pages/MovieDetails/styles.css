@@ -1,0 +1,62 @@
+@import "../../app/styles/colors.css";
+
+.poster {
+  margin-right: 42px;
+}
+
+.titleMovie {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.backLink {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-textPrimary);
+}
+
+.arrowLeft {
+  width: 12px;
+  height: 12px;
+  margin-right: 12px;
+}
+
+.groupDetails {
+  display: flex;
+  margin-bottom: 24px;
+  justify-content: space-between;
+}
+
+.imagePoster {
+  width: 200px;
+}
+
+.wrapperDetails {
+  display: flex;
+  margin-top: 24px;
+}
+
+.overview {
+  line-height: 20px;
+}
+
+.wrapperStars {
+  float: right;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapperDetails {
+    flex-direction: column;
+  }
+  .imagePoster {
+    width: 70%;
+  }
+
+  .movieDetails {
+    margin-top: 32px;
+  }
+  .groupDetails {
+    flex-direction: column;
+  }
+}

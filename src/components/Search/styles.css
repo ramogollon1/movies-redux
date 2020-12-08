@@ -1,0 +1,19 @@
+@import "../../app/styles/colors.css";
+
+.groupSearch {
+  display: flex;
+  align-items: center;
+}
+
+.iconSearch {
+  width: 24px;
+  vertical-align: middle;
+}
+
+.inputSearch {
+  border: 1px solid var(--color-gray200);
+  color: var(--color-gray300);
+  margin-left: 12px;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+}

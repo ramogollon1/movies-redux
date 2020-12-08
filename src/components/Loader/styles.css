@@ -1,0 +1,5 @@
+@import "../../app/styles/colors.css";
+
+.loader {
+  fill: var(--color-blue500);
+}

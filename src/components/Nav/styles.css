@@ -1,0 +1,29 @@
+@import "../../app/styles/colors.css";
+
+.nav {
+  position: fixed;
+  box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 1;
+  background-color: var(--color-textWhite);
+  padding: 12px 0;
+  width: 100%;
+}
+
+.linkTitle {
+  font-size: 32px;
+  color: var(--color-textPrimary);
+  text-decoration: none;
+}
+
+.containerNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .linkTitle {
+    font-size: 18px;
+  }
+}
