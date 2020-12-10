@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentState } from "../../utils";
 import IconSearch from "../../app/assets/iconSearch.png";
-import Loader from "../../components/Loader";
-import { searchMovie, setLoading } from "../../redux/actions/searchActions.js";
+import Loader from "../Loader";
+import { searchMovie, setLoading } from "../../redux/actions/searchActions";
 import styles from "./styles.css";
 
 function Search() {
   const getStateData = getCurrentState();
-  const { loading } = getStateData;
+  const [valueSearch, setValueSearch] = useState("");
+  const {
+    loading,
+    search: { text },
+  } = getStateData;
   const dispatch = useDispatch();
 
-  function onHandleOnChangeSearch(e) {
+  function onHandleOnChangeSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const currentText = e.target.value;
+    setValueSearch(currentText);
     dispatch(setLoading());
     dispatch(searchMovie(currentText));
   }
@@ -28,6 +33,7 @@ function Search() {
         <input
           onChange={onHandleOnChangeSearch}
           className={styles.inputSearch}
+          value={valueSearch}
           type="text"
           placeholder="Search"
         />

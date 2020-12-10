@@ -1,20 +1,25 @@
 const paths = require("./paths");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const publicPath = "/";
 const BUILD_DIR = paths.appBuild;
 const APP_DIR = paths.appSrc + "/index.tsx";
 
+const isProd = process.env.NODE_ENV === "production";
 const config = {
-  mode: "development",
+  mode: isProd ? "production" : "development",
   entry: APP_DIR,
+  performance: { hints: false },
   output: {
     path: BUILD_DIR,
     filename: "bundle.js",
     publicPath,
   },
   resolve: {
-    extensions: [".js", ".ts", ".tsx"],
+    extensions: [".js", ".ts", ".tsx", ".css"],
   },
   module: {
     rules: [
@@ -47,7 +52,7 @@ const config = {
           {
             loader: "css-loader",
             options: {
-              localIdentName: "[local]",
+              localIdentName: "[name]__[local]--[hash:base64:5]",
               importLoaders: 1,
               modules: true,
             },
@@ -92,11 +97,62 @@ const config = {
     ],
   },
 
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          mangle: true,
+          cache: true,
+          parallel: true,
+          module: false,
+        },
+        extractComments: true,
+      }),
+    ],
+    splitChunks: {
+      chunks: "all",
+      automaticNameDelimiter: "-",
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        general: {
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       title: "Movies",
       inject: true,
       template: "public/index.html",
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: {
+        map: {
+          inline: false,
+          annotation: true,
+        },
+      },
+    }),
+    new webpack.DefinePlugin({
+      ENV: JSON.stringify({ env: { development: true } }),
     }),
   ],
 };

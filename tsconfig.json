@@ -1,18 +1,13 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "outDir": "./dist/",
-    "preserveConstEnums": true,
-    "removeComments": true,
-    "esModuleInterop": true,
+    "outDir": "dist/",
     "sourceMap": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
     "target": "es5",
-    "declaration": false,
-    "typeRoots": ["src/types", "node_modules/@types"]
+    "jsx": "react"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

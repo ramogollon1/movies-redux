@@ -1,0 +1,12 @@
+.titleCategory {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 12px 0;
+}
+
+.wrapperImage {
+  overflow: auto;
+  display: flex;
+  margin: 0 -12px;
+  white-space: nowrap;
+}

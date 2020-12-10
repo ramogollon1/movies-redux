@@ -20,6 +20,7 @@
   width: 12px;
   height: 12px;
   margin-right: 12px;
+  cursor: pointer;
 }
 
 .groupDetails {
@@ -30,6 +31,7 @@
 
 .imagePoster {
   width: 200px;
+  border-radius: 4px;
 }
 
 .wrapperDetails {

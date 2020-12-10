@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./styles.css";
 
-const Movie = ({ movie }) => {
+type Props = {
+  movie: { title: string; backdrop: string };
+};
+
+const Movie = ({ movie }: Props) => {
   const { title, backdrop } = movie;
   return (
     <div className={styles.movie}>

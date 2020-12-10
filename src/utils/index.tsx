@@ -1,21 +1,29 @@
 import { useSelector } from "react-redux";
 
 export const getCurrentState = () =>
-  useSelector((state) => state.moviesStore, []) || [];
+  useSelector((state: any) => state.moviesStore, []) || [];
 
-export const getMovieCategories = (movies) => {
-  const moviesReduced = movies.reduce((accumulator, obj) => {
+export const getMovieCategories = (movies: []) => {
+  if (!movies) return;
+  const moviesReduced = movies.reduce((accumulator: [], obj: any) => {
     return [...accumulator, ...obj.genres];
   }, []);
 
-  return moviesReduced.filter((v, i) => moviesReduced.indexOf(v) === i);
+  return moviesReduced.filter(
+    (v: [], i: number) => moviesReduced.indexOf(v) === i
+  );
 };
 
-export const filterMoviesByCategory = (categories, movies) => {
-  let groupCategories = [];
-  categories.map((category) => {
-    return movies.map((movie) => {
-      if (movie.genres.includes(category)) {
+export const filterMoviesByCategory = (
+  categories: string[],
+  movies: []
+): [] => {
+  if (!categories || !movies.length) return;
+  let groupCategories: any = [];
+  categories.forEach((category: string) => {
+    movies.forEach((movie: any) => {
+      const genres = movie.genres;
+      if (genres.includes(category)) {
         groupCategories.push({ category, movie });
       }
     });
@@ -23,9 +31,10 @@ export const filterMoviesByCategory = (categories, movies) => {
   return groupCategories;
 };
 
-export const groupByCategoryReduced = (moviesGroup) =>
-  moviesGroup.reduce(
-    (r, item) => {
+export const groupByCategoryReduced = (moviesGroup: []): [] => {
+  if (!moviesGroup) return;
+  return moviesGroup.reduce(
+    (r: any, item: { category: string; movie: [] }) => {
       let current = r.hash[item.category];
       if (!current) {
         current = r.hash[item.category] = {
@@ -39,3 +48,6 @@ export const groupByCategoryReduced = (moviesGroup) =>
     },
     { hash: {}, arr: [] }
   ).arr;
+};
+
+export const getMovieYear = (date: string) => new Date(date).getFullYear();

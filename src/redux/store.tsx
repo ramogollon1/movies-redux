@@ -6,7 +6,7 @@ import rootReducer from "./reducers";
 const middleware = [thunk];
 const initialState = {};
 
-const saveToLocalStorage = (state) => {
+const saveToLocalStorage = (state: any) => {
   try {
     const serializedState = JSON.stringify(state);
     localStorage.setItem("state", serializedState);
